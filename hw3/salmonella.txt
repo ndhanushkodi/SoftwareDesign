@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Feb 12 21:25:10 2014
+
+@author: Nitya Dhanushkodi
+
+"""
+
+When I used gene_finder on the Salmonella Enterica dna with a threshold of 
+600, I got an output of 7 genes in the form of amino acids.
+
+I put a few of these genes into protein-BLAST, and these are the proteins they
+coded for:
+    
+    ATP synthase SpaL [Salmonella enterica]
+    antigen presentation protein SpaN [Salmonella enterica]
+    type III secretion system protein SpaP [Salmonella enterica]
+    type III secretion system protein SpaR [Salmonella enterica]
+    surface presentation of antigens protein SpaO [Salmonella enterica subsp. enterica serovar Typhimurium str. LT2]
+    
+
+    
+    

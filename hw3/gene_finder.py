@@ -8,6 +8,8 @@ Created on Sun Feb  2 11:24:42 2014
 # you may find it useful to import these variables (although you are not required to use them)
 from amino_acids import aa, codons
 from random import shuffle
+from load import load_seq
+dna = load_seq("data/X73525.fa")
 
 def collapse(L):
     """ Converts a list of strings to a string by concatenating all elements of the list """
@@ -32,9 +34,9 @@ def coding_strand_to_AA(dna):
     codon_search = range(0,len(codons))
     
     for i in count_triple:
-        triplet = dna[i:i+3]
-        for j in codon_search:
-            if triplet in codons[j]:
+        triplet = dna[i:i+3] #gets the three base long codon
+        for j in codon_search: 
+            if triplet in codons[j]: #checks each list in codons for the codon
                 amino_acids += aa[j]
                 
     return amino_acids    
@@ -72,7 +74,7 @@ def get_reverse_complement(dna):
     """
     seqsize = len(dna)
     complement = ''
-    for i in range(seqsize-1, -1, -1):
+    for i in range(seqsize-1, -1, -1): #traversing the dna backwards, then adding the complementary base pair
         if dna[i] == 'A':
             complement += 'T'
         elif dna[i] == 'T':
@@ -120,7 +122,7 @@ def rest_of_ORF(dna):
     
     for i in count_triple:
         triplet = dna[i:i+3]
-        if triplet == 'TAG' or triplet == 'TAA' or triplet == 'TGA':
+        if triplet == 'TAG' or triplet == 'TAA' or triplet == 'TGA': #stops at the stop codon
             break
         else:
             ORF+= triplet
@@ -209,10 +211,6 @@ def find_all_ORFs(dna):
         returns: a list of non-nested ORFs
     """     
     all_ORFs = []
-    
-#    all_ORFs.append(find_all_ORFs_oneframe(dna[0:len(dna)])[0])
-#    all_ORFs.append(find_all_ORFs_oneframe(dna[1:len(dna)])[0]) #offset by 1
-#    all_ORFs.append(find_all_ORFs_oneframe(dna[2:len(dna)])[0]) #offset by 2
 
     all_ORFs += (find_all_ORFs_oneframe(dna[0:len(dna)]))
     all_ORFs += (find_all_ORFs_oneframe(dna[1:len(dna)])) #offset by 1
@@ -252,7 +250,6 @@ def find_all_ORFs_both_strands(dna):
     """
     all_ORFs = [] 
     reverse_complement = get_reverse_complement(dna)
-    #APPEND FOR DEBUGGING TO SEE IF DNA AND REVERSE COMPLEMENT GIVE THE RIGHT STUFF
     
     all_ORFs += (find_all_ORFs(dna)) #Finds ORFs for first strand
     all_ORFs += (find_all_ORFs(reverse_complement)) #Finds ORFs for reverse complement
@@ -287,7 +284,7 @@ def longest_ORF(dna):
         as a string"""
 
     all_ORFs = find_all_ORFs_both_strands(dna)
-    long_ORF = max(all_ORFs, key=len)
+    long_ORF = max(all_ORFs, key=len) #to get the longest open reading frame
     return long_ORF
 
 
@@ -320,15 +317,16 @@ def longest_ORF_noncoding(dna, num_trials):
         dna: a DNA sequence
         num_trials: the number of random shuffles
         returns: the maximum length longest ORF """
+        
     longest_ORFs = []
     s = list(dna)
-    for i in range(0,num_trials):
+    for i in range(0,num_trials): #needs to shuffle and re-collapse the dna 
         shuffle(s)
         collapse(s)
         longest_ORFs.append(longest_ORF(s))
     
-    long_ORF = max(longest_ORFs, key=len)
-    return long_ORF
+    long_ORF = max(longest_ORFs, key=len) 
+    return len(long_ORF)
         
         
 
@@ -346,9 +344,10 @@ def gene_finder(dna, threshold):
     all_ORFs = find_all_ORFs_both_strands(dna)
     amino_acids = []
     for i in range(0,len(all_ORFs)):
-        if all_ORFs[i]> threshold:
-            aa = coding_strand_to_aa(all_ORFs[i])
+        if (len(all_ORFs[i])> threshold):
+            aa = coding_strand_to_AA(all_ORFs[i]) #only if the ORF is longer than the threshold, it is considered a gene and decoded into amino acids
             amino_acids.append(aa)
             
+    return amino_acids
             
             
