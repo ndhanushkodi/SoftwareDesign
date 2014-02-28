@@ -11,6 +11,10 @@ import Image
 import math
 
 
+## SS: Nice doc strings and comments, and great work overall! Functionality is very sound :) 
+
+## SS: You didn't implement a remap_interval() method as was specified in the assignment
+
 def build_random_function(min_depth, max_depth):
     """ This function outputs a random function using recursion. The arguments of the functions themselves can be functions
     which is where the recursion comes in. The function takes in a min_depth and a max_depth to specify how 'deep' the functions
@@ -41,7 +45,9 @@ def build_random_function(min_depth, max_depth):
     return rand_func
 
     
-
+## SS: Passes my tests :) 
+## SS: for this function, you might make use of 'elif' statements, even though the functionailty
+##     is the same, stylistically, it's preferable
 def evaluate_random_function(f, x, y):
     """This function evaluates the random function that I input, given values for x and y. It looks at the first element
     of each list, sees what operation to do, and outputs that operation for its arguments, which can be functions themselves. 
@@ -63,7 +69,7 @@ def evaluate_random_function(f, x, y):
         return y
         
 
-    
+## SS: Love the doc string :) 
 def make_art():  
     """Running this code will make the beautiful art which is sometimes ugly but not very often
     This function builds random functions to represent the red, green, and blue values of pixels. It then loops through the pixels, 
@@ -100,3 +106,5 @@ def make_art():
     
     im.save("pic3.png")
     im.show()
+
+make_art()
