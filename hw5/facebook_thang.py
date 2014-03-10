@@ -9,7 +9,20 @@ from pattern.en import *
 import time
 import matplotlib.pyplot as plt
 
+## SS: Great job guys! This is some beautiful code and you execute the requirements of the assignment
+##     beautifully! 
 
+## SS: Great job on the amount of comments. The style of this code is great. Doc strings are explanatory
+##     of what's going on, and your variable names are self-explanatory. Great job there! I might suggest
+##     using more explantory names of funcitons in the future, for example, I didn't really get that 
+##     facebook_search() was looking for a specific topic. 
+
+## SS: Maybe it'd be a good idea to have the licesnce as the input to the functions it's necessary in
+##     and similarly with the topic. These should be function inputs. 
+
+
+## SS: For this funciton, it might be good to add in the doc string what the values in the list of
+##     tuples represent
 def facebook_status1():
     
     """
@@ -42,7 +55,6 @@ def facebook_status1():
             status_sentiments.append(sentiment(statuses[i]))
     return status_sentiments
     
-
 
 def facebook_search():
 
@@ -122,7 +134,6 @@ def get_subjectivity_unit_test():
     print 'Subjectivity Values'+ subjectivity
      
   
-   
 def plot_histogram(which_sentiment, status_or_search):
 
     """
@@ -135,8 +146,9 @@ def plot_histogram(which_sentiment, status_or_search):
     If the operation times out, just run it again. It shouldn't time out with a smaller count in 
     facebook_search, but we think it's because sometimes the internet is slow. 
     """
-    
+
     if which_sentiment == 'feelings': #checks which to plot-- feelings or subjectivity
+        ## SS: It might be better to use 'if' then 'elif'
         if status_or_search == 'search public': #checks whether to search public posts or friend posts
             all_sentiment = facebook_search() 
         if status_or_search == 'status': #friend posts
@@ -164,6 +176,5 @@ def plot_histogram(which_sentiment, status_or_search):
         plt.show()
         return x1
         
-    
       
     
