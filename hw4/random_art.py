@@ -13,8 +13,6 @@ import math
 
 ## SS: Nice doc strings and comments, and great work overall! Functionality is very sound :) 
 
-## SS: You didn't implement a remap_interval() method as was specified in the assignment
-
 def build_random_function(min_depth, max_depth):
     """ This function outputs a random function using recursion. The arguments of the functions themselves can be functions
     which is where the recursion comes in. The function takes in a min_depth and a max_depth to specify how 'deep' the functions
